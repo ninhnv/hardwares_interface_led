@@ -1,0 +1,69 @@
+cc_library_shared {
+    name: "android.hardware.led@1.0-impl",
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    relative_install_path: "hw",
+    srcs: ["ledImpl.cpp"],
+
+    shared_libs: [
+        "libbase",
+        "libhidlbase",
+        "libhidltransport",
+        "libhardware",
+        "liblog",
+        "libutils",
+        "android.hardware.led@1.0",
+    ],
+}
+
+cc_binary {
+    name: "android.hardware.led@1.0-service",
+    relative_install_path: "hw",
+    defaults: ["hidl_defaults"],
+    vendor: true,
+    init_rc: ["android.hardware.led@1.0-service.rc"],
+    srcs: ["service.cpp",
+           "ledImpl.cpp" ],
+
+    shared_libs: [
+        "liblog",
+        "libbase",
+        "libdl",
+        "libutils",
+        "libhardware",
+        "libhidlbase",
+        "libhidltransport",
+        "android.hardware.led@1.0",
+    ],
+}
+
+cc_binary {
+    name: "ledgpio_led_off_test",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+    srcs: ["ledgpio_led_off_test.cpp"],
+ 
+    shared_libs: [
+        "android.hardware.led@1.0",
+        "libhidlbase",
+        "libhidltransport",
+        "liblog",
+        "libutils",
+    ],
+}
+
+cc_binary {
+    name: "ledgpio_led_on_test",
+    defaults: ["hidl_defaults"],
+    proprietary: true,
+    srcs: ["ledgpio_led_on_test.cpp"],
+ 
+    shared_libs: [
+        "android.hardware.led@1.0",
+        "libhidlbase",
+        "libhidltransport",
+        "liblog",
+        "libutils",
+    ],
+}
+
